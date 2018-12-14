@@ -1,0 +1,22 @@
+{
+  "name": "word-guess-game-node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/noel3740/Word-Guess-Game-Node.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/noel3740/Word-Guess-Game-Node/issues"
+  },
+  "homepage": "https://github.com/noel3740/Word-Guess-Game-Node#readme",
+  "dependencies": {
+    "inquirer": "^6.2.1"
+  }
+}
