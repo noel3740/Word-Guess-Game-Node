@@ -14,10 +14,12 @@ class Letter {
     }
 
     //Method to update the isLetterGuessed flag to true if the guessed letter 
-    //passed to it matches the actual letter
+    //passed to it matches the actual letter (ignoring case)
     guessLetter(guessChar) {
-        if (this.char === guessChar) {
+        if (this.char.toLowerCase() === guessChar.toLowerCase()) {
             this.isLetterGuessed = true;
         }
     }
 }
+
+module.exports =  Letter;
