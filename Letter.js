@@ -4,7 +4,7 @@ class Letter {
     constructor(char) {
         this.char = char;
         this.isLetterGuessed = false;
-        this.placeHolderChar = "_";
+        this.placeHolderChar = " _ ";
     }
 
     //Overriding toString method to output the placeholder character if the letter is not guessed
