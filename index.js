@@ -25,6 +25,12 @@ startNewGame = () => {
     numGuessRemain = 12;
     lettersGuessed = [];
 
+    //Display wins and losses
+    console.log();
+    console.log('\x1b[33m%s\x1b[0m', `WINS: ${wins}`);
+    console.log('\x1b[33m%s\x1b[0m', `LOSSES: ${losses}`);
+    console.log();
+
     //If wordsToGuessFrom is empty the repopulate with words from the constant variable words
     if (!wordsToGuessFrom || wordsToGuessFrom.length === 0) {
         wordsToGuessFrom = [...words];
@@ -43,25 +49,20 @@ promptGuess = () => {
 
     if (numGuessRemain === 0) {
         losses++;
-        console.log();
-        console.log('\x1b[31m%s\x1b[0m',"===============================================================");
-        console.log('\x1b[31m%s\x1b[0m',`You have lost!!! The correct word was: ${wordToGuess.wordToGuess}`);
-        console.log('\x1b[31m%s\x1b[0m',"===============================================================");
+        console.log('\x1b[31m%s\x1b[0m', "===============================================================");
+        console.log('\x1b[31m%s\x1b[0m', `You have lost!!! The correct word was: ${wordToGuess.wordToGuess}`);
+        console.log('\x1b[31m%s\x1b[0m', "===============================================================");
         console.log();
         //Prompt user to see if they want to play another round
         playAgainPrompt();
         return;
     }
 
-    console.log();
-    console.log('\x1b[33m%s\x1b[0m', `WINS: ${wins}`);
-    console.log('\x1b[33m%s\x1b[0m', `LOSSES: ${losses}`);
     console.log('\x1b[35m%s\x1b[0m', `CURRENT WORD: ${wordToGuess.toString()}`);
     console.log();
     console.log("Number of guesses remaining: ", numGuessRemain);
     console.log("Letters already guessed: ", lettersGuessed.toString());
     console.log();
-    console.log("==============================");
 
     inquirer.prompt([
         {
@@ -71,12 +72,24 @@ promptGuess = () => {
         }
     ]).then(answer => {
         lettersGuessed.push(answer.guess);
-        wordToGuess.guessLetterInWord(answer.guess);
+        console.log();
+        console.log("==============================");
+        console.log();
+
+        //If the user guessed the letter correctly then display
+        //to the user they were correct else tell them they were wrong
+        if (wordToGuess.guessLetterInWord(answer.guess)) {
+            console.log('\x1b[32m%s\x1b[0m', "CORRECT!!!");
+        } else {
+            numGuessRemain--;
+            console.log('\x1b[31m%s\x1b[0m', "INCORRECT!!!");
+        }
+
+        console.log();
 
         //If there are still underscores in the word then the user has not guessed correctly yet
         //Prompt the user to guess another letter
         if (wordToGuess.toString().indexOf("_") >= 0) {
-            console.log("==============================");
             promptGuess();
         }
         //User has guessed the word correctly
@@ -90,10 +103,9 @@ promptGuess = () => {
 userWins = () => {
     wins++;
 
-    console.log();
-    console.log('\x1b[32m%s\x1b[0m',"===============================================================");
-    console.log('\x1b[32m%s\x1b[0m',`You have won!!! The correct word was: ${wordToGuess.wordToGuess}`);
-    console.log('\x1b[32m%s\x1b[0m',"===============================================================");
+    console.log('\x1b[32m%s\x1b[0m', "===============================================================");
+    console.log('\x1b[32m%s\x1b[0m', `You have won!!! The correct word was: ${wordToGuess.wordToGuess}`);
+    console.log('\x1b[32m%s\x1b[0m', "===============================================================");
     console.log();
 
     //Prompt user to see if they want to play another round
@@ -112,13 +124,18 @@ playAgainPrompt = () => {
     ]).then(answer => {
         //If the user wants to play again then start a new game otherwise display the final results
         if (answer.playAgain) {
-            console.log("===============================================================");
             console.log();
+            console.log("===============================================================");
 
             startNewGame();
         } else {
-            console.log("WINS: ", wins);
-            console.log("LOSSES: ", losses);
+            //Display wins and losses
+            console.log();
+            console.log("===============================================================");
+            console.log();
+            console.log('\x1b[33m%s\x1b[0m', `WINS: ${wins}`);
+            console.log('\x1b[33m%s\x1b[0m', `LOSSES: ${losses}`);
+            console.log();
         }
     });
 };
