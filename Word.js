@@ -23,7 +23,7 @@ class Word {
     //represents the guessed word with letters not guessed represented with underlines
     toString() {
         //Join will automatically call the toString method on the Letter class
-        return this.wordLetterArray.join("");
+        return this.wordLetterArray.join(" ");
     }
 
     //Method to guess a letter in the word
