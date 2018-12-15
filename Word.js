@@ -27,9 +27,23 @@ class Word {
     }
 
     //Method to guess a letter in the word
+    //Returns true if guessed correctly and false if not
     guessLetterInWord(guessChar) {
+        let guessedCorrectly = false;
+
         //Run through each letter in the letter array and run the guessLetter method on it
-        this.wordLetterArray.forEach(letter => letter.guessLetter(guessChar));
+        this.wordLetterArray.forEach(letter => {
+            if (!letter.isLetterGuessed) {
+                letter.guessLetter(guessChar);
+
+                //If the letter guess flag is now true then set the return variable guessedCorrectly to true
+                if (letter.isLetterGuessed) {
+                    guessedCorrectly = true;
+                }
+            }
+        });
+
+        return guessedCorrectly;
     }
 }
 
