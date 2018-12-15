@@ -13,6 +13,7 @@ const words = ["ukulele", "aloha", "poke", "mahalo", "hawaii", "maui", "surf",
     "beaches", "harbor", "waterfalls", "mountains", "dolphins", "hula",
     "leis"];
 
+//Create global variables
 let wordsToGuessFrom;
 let numGuessRemain;
 let wordToGuess;
